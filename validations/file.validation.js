@@ -4,6 +4,7 @@ module.exports = {
     fileUpload:{
         [Segments.BODY]:{
             filePassword:Joi.string().required(),
+            bankName:Joi.string().required(),
         },
     }
 }

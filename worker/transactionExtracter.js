@@ -9,6 +9,9 @@ function TransactionExtracter({dirName,bankName}){
     this.bankName = bankName;
     this.filteredFiles = [];
     this.transactions = [];
+    this.bankIndentifierMap ={
+        SBI:SBI_IDENTIFIER
+    }
 }
 TransactionExtracter.prototype.initializeFiles = async function(){
     try {
@@ -39,7 +42,7 @@ TransactionExtracter.prototype.filterFiles= async function(){
         const fileHandle = await fsPromise.open(path.join(this.dirName,fileName),'r+');
         const buffer = Buffer.alloc(100);
         const data = await readPromise(fileHandle,buffer,0,100,null)
-        if(data === SBI_IDENTIFIER)
+        if(data === this.bankIndentifierMap[this.bankName])
         {
            this.filteredFiles.push(fileName);
         }

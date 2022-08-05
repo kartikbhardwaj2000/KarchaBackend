@@ -8,7 +8,7 @@ const executeJob = async (data)=>{
     // const transactionExtracter = new TransactionExtracter({dirName:path.join(__dirname,'temp','extractedFiles','transFile-1659590892551-459563008','tables'),bankName:SBI});
     const tableExtracter = new TableExtracter(data);
     const fileNameWithoutExtn = data.fileName.split('.')[0];
-    const transactionExtracter = new TransactionExtracter({dirName:path.join(__dirname,'temp','extractedFiles',fileNameWithoutExtn,'tables'), bankName:SBI});
+    const transactionExtracter = new TransactionExtracter({dirName:path.join(__dirname,'temp','extractedFiles',fileNameWithoutExtn,'tables'), bankName:data.bankName});
     await tableExtracter.removeProtection();
     await tableExtracter.extractTables();
     await tableExtracter.extractZipFiles();
