@@ -17,38 +17,38 @@ const PDFServicesSdk = require('@adobe/pdfservices-node-sdk');
  * Refer to README.md for instructions on how to run the samples.
  */
 try {
-    // Initial setup, create credentials instance.
-    const credentials = PDFServicesSdk.Credentials
-        .serviceAccountCredentialsBuilder()
-        .fromFile("adobe-api-creds.json")
-        .build();
+  // Initial setup, create credentials instance.
+  const credentials = PDFServicesSdk.Credentials
+    .serviceAccountCredentialsBuilder()
+    .fromFile('adobe-api-creds.json')
+    .build();
 
-    // Create an ExecutionContext using credentials
-    const executionContext = PDFServicesSdk.ExecutionContext.create(credentials);
+  // Create an ExecutionContext using credentials
+  const executionContext = PDFServicesSdk.ExecutionContext.create(credentials);
 
-    // Create a new operation instance.
-    const removeProtectionOperation = PDFServicesSdk.RemoveProtection.Operation.createNew(),
-        input = PDFServicesSdk.FileRef.createFromLocalFile(
-            'C:\\Users\\Asus\\Desktop\\projects\\KarchaBackend\\uploadedFiles\\transFile-1659590892551-459563008.pdf',
-            PDFServicesSdk.RemoveProtection.SupportedSourceFormat.pdf
-        );
+  // Create a new operation instance.
+  const removeProtectionOperation = PDFServicesSdk.RemoveProtection.Operation.createNew();
+  const input = PDFServicesSdk.FileRef.createFromLocalFile(
+    'C:\\Users\\Asus\\Desktop\\projects\\KarchaBackend\\uploadedFiles\\transFile-1659590892551-459563008.pdf',
+    PDFServicesSdk.RemoveProtection.SupportedSourceFormat.pdf,
+  );
     // Set operation input from a source file.
-    removeProtectionOperation.setInput(input);
+  removeProtectionOperation.setInput(input);
 
-    // Set the password for removing security from a PDF document.
-    removeProtectionOperation.setPassword("95400150201");
+  // Set the password for removing security from a PDF document.
+  removeProtectionOperation.setPassword('95400150201');
 
-    // Execute the operation and Save the result to the specified location.
-    removeProtectionOperation.execute(executionContext)
-        .then(result => result.saveAsFile('output/removeProtectionOutput.pdf'))
-        .catch(err => {
-            if(err instanceof PDFServicesSdk.Error.ServiceApiError
+  // Execute the operation and Save the result to the specified location.
+  removeProtectionOperation.execute(executionContext)
+    .then((result) => result.saveAsFile('output/removeProtectionOutput.pdf'))
+    .catch((err) => {
+      if (err instanceof PDFServicesSdk.Error.ServiceApiError
                 || err instanceof PDFServicesSdk.Error.ServiceUsageError) {
-                console.log('Exception encountered while executing operation', err);
-            } else {
-                console.log('Exception encountered while executing operation', err);
-            }
-        });
+        console.log('Exception encountered while executing operation', err);
+      } else {
+        console.log('Exception encountered while executing operation', err);
+      }
+    });
 } catch (err) {
-    console.log('Exception encountered while executing operation', err);
+  console.log('Exception encountered while executing operation', err);
 }

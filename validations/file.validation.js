@@ -1,10 +1,10 @@
-const { Segments, Joi } = require("celebrate");
+const { Segments, Joi } = require('celebrate');
 
 module.exports = {
-    fileUpload:{
-        [Segments.BODY]:{
-            filePassword:Joi.string().required(),
-            bankName:Joi.string().required(),
-        },
-    }
-}
+  fileUpload: {
+    [Segments.BODY]: {
+      filePassword: Joi.string().required(),
+      bankName: Joi.string().required(),
+    },
+  },
+};
