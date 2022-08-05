@@ -1,5 +1,4 @@
 const Agenda = require('agenda');
-const TableExtracter = require('./tableExtracter');
 const { MONGO_URI } = require('../constants');
 const executeJob = require('./executeJob');
 require('./load-adobe-creds');
@@ -9,7 +8,8 @@ worker.name(`worker ${process.pid}`);
 
 // agenda.on('fail', (err, job) => {
 //     if (isErrorTemporary(err)) { // checking that the error is a network error for instance
-//       job.attrs.nextRunAt = moment().add(10000, 'milliseconds').toDate(); // retry 10 seconds later
+//       job.attrs.nextRunAt = moment().add(10000, 'milliseconds').toDate(); 
+// retry 10 seconds later
 //       job.save();
 //     }
 //   });
@@ -19,11 +19,9 @@ worker.define('ProcessPdf', async (job) => {
   const records = await executeJob(data);
   console.log(records);
   console.log('done');
-  if(!records)
-  {
+  if (!records) {
     return [];
-  }else  return records;
- 
+  } return records;
 });
 
 worker.on('ready', async () => {

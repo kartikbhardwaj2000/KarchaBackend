@@ -30,7 +30,7 @@ TableExtracter.prototype.extractTables = async function () {
     extractPDFOperation.addTableStructureFormat(ExtractPdfSDK.TableStructureType.CSV);
     await extractPDFOperation.execute(clientContext).then((result) => result.saveAsFile(path.join(__dirname, 'temp', 'zipFiles', this.fileName))).catch((error) => console.log(error));
   } catch (error) {
-    console.log('Exception encountered while executing operation', err);
+    console.log('Exception encountered while executing operation', error);
   }
 };
 
